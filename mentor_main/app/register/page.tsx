@@ -27,7 +27,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 
-// Schemat walidacji Zod (musi pasować do schematu w app/api/register/route.ts)
+// Schemat walidacji Zod
 const formSchema = z.object({
   name: z.string().min(3, "Imię musi mieć co najmniej 3 znaki."),
   email: z.string().email("Nieprawidłowy adres email."),
@@ -36,9 +36,6 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-/**
- * Komponent formularza rejestracji i całej strony rejestracji.
- */
 export default function RegisterForm() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -53,7 +50,6 @@ export default function RegisterForm() {
     },
   });
 
-  // Funkcja obsługująca wysłanie formularza
   async function onSubmit(values: FormData) {
     setIsLoading(true);
 
@@ -69,22 +65,18 @@ export default function RegisterForm() {
       const data = await response.json();
 
       if (response.ok) {
-        // Sukces rejestracji
         toast({
           title: "Sukces!",
           description: "Konto zostało utworzone. Zostaniesz teraz przekierowany do logowania.",
         });
-        // Przekierowanie do strony logowania
         router.push("/login"); 
       } else if (response.status === 409) {
-        // Błąd 409: Użytkownik już istnieje
         toast({
           variant: "destructive",
           title: "Błąd rejestracji",
           description: data.error || "Użytkownik o tym emailu już istnieje.",
         });
       } else {
-        // Inne błędy (np. 400 - walidacja)
         toast({
           variant: "destructive",
           title: "Błąd rejestracji",
@@ -104,7 +96,8 @@ export default function RegisterForm() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50">
+    // ZMIANA: Używamy 'bg-background' zamiast 'bg-gray-50' dla poprawnego motywu
+    <div className="flex justify-center items-center min-h-screen bg-background">
       <Card className="w-full max-w-sm">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl text-center">Utwórz konto</CardTitle>
@@ -115,7 +108,6 @@ export default function RegisterForm() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              {/* Pole Imię */}
               <FormField
                 control={form.control}
                 name="name"
@@ -133,7 +125,6 @@ export default function RegisterForm() {
                   </FormItem>
                 )}
               />
-              {/* Pole Email */}
               <FormField
                 control={form.control}
                 name="email"
@@ -151,7 +142,6 @@ export default function RegisterForm() {
                   </FormItem>
                 )}
               />
-              {/* Pole Hasło */}
               <FormField
                 control={form.control}
                 name="password"
@@ -167,7 +157,7 @@ export default function RegisterForm() {
                       />
                     </FormControl>
                     <FormMessage />
-                  </FormItem> 
+                  </FormItem>
                 )}
               />
               <Button type="submit" className="w-full" disabled={isLoading}>

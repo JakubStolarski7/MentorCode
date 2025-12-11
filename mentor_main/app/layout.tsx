@@ -5,15 +5,12 @@ import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 
-// Nowe Importy dla Uwierzytelniania i Powiadomień
 import SessionProvider from "@/components/session-provider";
 import { Toaster } from "@/components/ui/toaster";
 
-// Używamy Inter font dla czystego, nowoczesnego stylu edukacyjnego
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  // Zaktualizowane metadane dla MentorCode
   title: "MentorCode – Naucz się myśleć jak programista",
   description: "Każde rozwiązanie zawiera dokładną analizę : co, jak i – co najważniejsze – dlaczego.",
   generator: "v0.app",
@@ -42,11 +39,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pl"> {/* Zmieniono lang="en" na lang="pl" (zgodnie z poprzednimi ustaleniami) */}
+    <html lang="pl">
       <body className={`${inter.className} antialiased`}>
-        {/* Właściwy order: SessionProvider musi otaczać ThemeProvider, jeśli ThemeProvider musi mieć dostęp do sesji. */}
         <SessionProvider>
-          {/* Usunięto błąd: komentarz wewnątrz JSX nie może być otoczony klamrami {} */}
           <ThemeProvider defaultTheme="light" attribute="class"> 
             {children}
             <Toaster />

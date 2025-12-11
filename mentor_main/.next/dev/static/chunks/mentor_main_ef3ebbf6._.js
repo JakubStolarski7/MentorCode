@@ -637,7 +637,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$
 var __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__ = __turbopack_context__.i("[project]/mentor_main/node_modules/zod/v3/external.js [app-client] (ecmascript) <export * as z>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f40$hookform$2f$resolvers$2f$zod$2f$dist$2f$zod$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/mentor_main/node_modules/@hookform/resolvers/zod/dist/zod.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/mentor_main/node_modules/next/dist/client/app-dir/link.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/mentor_main/node_modules/next-auth/react/index.js [app-client] (ecmascript)"); // Importujemy kluczową funkcję signIn
+var __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/mentor_main/node_modules/next-auth/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/mentor_main/components/ui/card.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$components$2f$ui$2f$form$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/mentor_main/components/ui/form.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/mentor_main/components/ui/input.tsx [app-client] (ecmascript)");
@@ -658,7 +658,6 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
-// Schemat walidacji Zod
 const formSchema = __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].object({
     email: __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().email("Nieprawidłowy adres email."),
     password: __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$zod$2f$v3$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().min(1, "Hasło jest wymagane.")
@@ -675,32 +674,26 @@ function LoginForm() {
             password: ""
         }
     });
-    // Funkcja obsługująca wysłanie formularza
     async function onSubmit(values) {
         setIsLoading(true);
         try {
-            // Użycie funkcji signIn z NextAuth.js
-            // 'credentials' to nazwa naszego CredentialsProvider zdefiniowanego w lib/auth.ts
             const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["signIn"])("credentials", {
                 redirect: false,
                 email: values.email,
                 password: values.password
             });
             if (result?.error) {
-                // Błąd logowania (np. złe dane)
                 toast({
                     variant: "destructive",
                     title: "Błąd logowania",
                     description: "Nieprawidłowy email lub hasło. Spróbuj ponownie."
                 });
             } else if (result?.ok) {
-                // Sukces logowania
                 toast({
                     title: "Sukces!",
                     description: "Zalogowano pomyślnie. Trwa przekierowanie..."
                 });
-                // Przekierowanie na stronę główną lub do pulpitu
-                router.push("/");
+                router.push("/dashboard");
             }
         } catch (error) {
             console.error("Błąd sieci podczas logowania:", error);
@@ -713,8 +706,9 @@ function LoginForm() {
             setIsLoading(false);
         }
     }
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "flex justify-center items-center min-h-screen bg-gray-50",
+    return(// ZMIANA: Usunięto 'bg-gray-50'. Teraz używamy 'bg-background', co respektuje Twój ciemny motyw.
+    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "flex justify-center items-center min-h-screen bg-background",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
             className: "w-full max-w-sm",
             children: [
@@ -726,7 +720,7 @@ function LoginForm() {
                             children: "Zaloguj się"
                         }, void 0, false, {
                             fileName: "[project]/mentor_main/app/login/page.tsx",
-                            lineNumber: 101,
+                            lineNumber: 91,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
@@ -734,13 +728,13 @@ function LoginForm() {
                             children: "Wprowadź swoje dane, aby kontynuować"
                         }, void 0, false, {
                             fileName: "[project]/mentor_main/app/login/page.tsx",
-                            lineNumber: 102,
+                            lineNumber: 92,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/mentor_main/app/login/page.tsx",
-                    lineNumber: 100,
+                    lineNumber: 90,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -759,7 +753,7 @@ function LoginForm() {
                                                     children: "Email"
                                                 }, void 0, false, {
                                                     fileName: "[project]/mentor_main/app/login/page.tsx",
-                                                    lineNumber: 115,
+                                                    lineNumber: 104,
                                                     columnNumber: 21
                                                 }, void 0),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$components$2f$ui$2f$form$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FormControl"], {
@@ -769,28 +763,28 @@ function LoginForm() {
                                                         disabled: isLoading
                                                     }, void 0, false, {
                                                         fileName: "[project]/mentor_main/app/login/page.tsx",
-                                                        lineNumber: 117,
+                                                        lineNumber: 106,
                                                         columnNumber: 23
                                                     }, void 0)
                                                 }, void 0, false, {
                                                     fileName: "[project]/mentor_main/app/login/page.tsx",
-                                                    lineNumber: 116,
+                                                    lineNumber: 105,
                                                     columnNumber: 21
                                                 }, void 0),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$components$2f$ui$2f$form$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FormMessage"], {}, void 0, false, {
                                                     fileName: "[project]/mentor_main/app/login/page.tsx",
-                                                    lineNumber: 123,
+                                                    lineNumber: 112,
                                                     columnNumber: 21
                                                 }, void 0)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/mentor_main/app/login/page.tsx",
-                                            lineNumber: 114,
+                                            lineNumber: 103,
                                             columnNumber: 19
                                         }, void 0)
                                 }, void 0, false, {
                                     fileName: "[project]/mentor_main/app/login/page.tsx",
-                                    lineNumber: 110,
+                                    lineNumber: 99,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$components$2f$ui$2f$form$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FormField"], {
@@ -802,7 +796,7 @@ function LoginForm() {
                                                     children: "Hasło"
                                                 }, void 0, false, {
                                                     fileName: "[project]/mentor_main/app/login/page.tsx",
-                                                    lineNumber: 133,
+                                                    lineNumber: 121,
                                                     columnNumber: 21
                                                 }, void 0),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$components$2f$ui$2f$form$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FormControl"], {
@@ -813,28 +807,28 @@ function LoginForm() {
                                                         disabled: isLoading
                                                     }, void 0, false, {
                                                         fileName: "[project]/mentor_main/app/login/page.tsx",
-                                                        lineNumber: 135,
+                                                        lineNumber: 123,
                                                         columnNumber: 23
                                                     }, void 0)
                                                 }, void 0, false, {
                                                     fileName: "[project]/mentor_main/app/login/page.tsx",
-                                                    lineNumber: 134,
+                                                    lineNumber: 122,
                                                     columnNumber: 21
                                                 }, void 0),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$components$2f$ui$2f$form$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FormMessage"], {}, void 0, false, {
                                                     fileName: "[project]/mentor_main/app/login/page.tsx",
-                                                    lineNumber: 142,
+                                                    lineNumber: 130,
                                                     columnNumber: 21
                                                 }, void 0)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/mentor_main/app/login/page.tsx",
-                                            lineNumber: 132,
+                                            lineNumber: 120,
                                             columnNumber: 19
                                         }, void 0)
                                 }, void 0, false, {
                                     fileName: "[project]/mentor_main/app/login/page.tsx",
-                                    lineNumber: 128,
+                                    lineNumber: 116,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -844,23 +838,23 @@ function LoginForm() {
                                     children: isLoading ? "Logowanie..." : "Zaloguj się"
                                 }, void 0, false, {
                                     fileName: "[project]/mentor_main/app/login/page.tsx",
-                                    lineNumber: 146,
+                                    lineNumber: 134,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/mentor_main/app/login/page.tsx",
-                            lineNumber: 108,
+                            lineNumber: 98,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/mentor_main/app/login/page.tsx",
-                        lineNumber: 107,
+                        lineNumber: 97,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/mentor_main/app/login/page.tsx",
-                    lineNumber: 106,
+                    lineNumber: 96,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$mentor_main$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardFooter"], {
@@ -871,25 +865,25 @@ function LoginForm() {
                         children: "Nie masz konta? Zarejestruj się"
                     }, void 0, false, {
                         fileName: "[project]/mentor_main/app/login/page.tsx",
-                        lineNumber: 153,
+                        lineNumber: 141,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/mentor_main/app/login/page.tsx",
-                    lineNumber: 152,
+                    lineNumber: 140,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/mentor_main/app/login/page.tsx",
-            lineNumber: 99,
+            lineNumber: 89,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/mentor_main/app/login/page.tsx",
-        lineNumber: 98,
+        lineNumber: 88,
         columnNumber: 5
-    }, this);
+    }, this));
 }
 _s(LoginForm, "QJ6YTA5NjJlYix2Q57jFSA2Vo/U=", false, function() {
     return [

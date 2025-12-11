@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { signIn } from "next-auth/react"; // Importujemy kluczową funkcję signIn
+import { signIn } from "next-auth/react";
 
 import {
   Card,
@@ -28,8 +28,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 
-
-// Schemat walidacji Zod
 const formSchema = z.object({
   email: z.string().email("Nieprawidłowy adres email."),
   password: z.string().min(1, "Hasło jest wymagane."),
@@ -37,9 +35,6 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-/**
- * Komponent formularza logowania i całej strony logowania.
- */
 export default function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -53,34 +48,28 @@ export default function LoginForm() {
     },
   });
 
-  // Funkcja obsługująca wysłanie formularza
   async function onSubmit(values: FormData) {
     setIsLoading(true);
 
     try {
-      // Użycie funkcji signIn z NextAuth.js
-      // 'credentials' to nazwa naszego CredentialsProvider zdefiniowanego w lib/auth.ts
       const result = await signIn("credentials", {
-        redirect: false, // Zapobiegamy automatycznemu przekierowaniu
+        redirect: false,
         email: values.email,
         password: values.password,
       });
 
       if (result?.error) {
-        // Błąd logowania (np. złe dane)
         toast({
           variant: "destructive",
           title: "Błąd logowania",
           description: "Nieprawidłowy email lub hasło. Spróbuj ponownie.",
         });
       } else if (result?.ok) {
-        // Sukces logowania
         toast({
           title: "Sukces!",
           description: "Zalogowano pomyślnie. Trwa przekierowanie...",
         });
-        // Przekierowanie na stronę główną lub do pulpitu
-        router.push("/"); 
+        router.push("/dashboard"); 
       }
     } catch (error) {
       console.error("Błąd sieci podczas logowania:", error);
@@ -95,7 +84,8 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50">
+    // ZMIANA: Usunięto 'bg-gray-50'. Teraz używamy 'bg-background', co respektuje Twój ciemny motyw.
+    <div className="flex justify-center items-center min-h-screen bg-background">
       <Card className="w-full max-w-sm">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl text-center">Zaloguj się</CardTitle>
@@ -106,7 +96,6 @@ export default function LoginForm() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              {/* Pole Email */}
               <FormField
                 control={form.control}
                 name="email"
@@ -124,7 +113,6 @@ export default function LoginForm() {
                   </FormItem>
                 )}
               />
-              {/* Pole Hasło */}
               <FormField
                 control={form.control}
                 name="password"
