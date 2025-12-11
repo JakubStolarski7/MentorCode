@@ -1,14 +1,20 @@
 "use client"
 
 import type React from "react"
-
 import { createContext, useContext, useEffect, useState } from "react"
 
 type Theme = "light" | "dark"
 
+// ROZSZERZONA DEFINICJA TYPÓW:
+// Używamy React.HTMLAttributes<HTMLDivElement> lub podobnego, aby zaakceptować
+// dodatkowe propsy, takie jak 'attribute', które mogą być przekazane.
+// Dla prostoty i pewności typowania, użyjemy generycznego podejścia,
+// które zaakceptuje atrybuty elementu div (lub innych) i nasze własne.
 type ThemeProviderProps = {
   children: React.ReactNode
   defaultTheme?: Theme
+  // Dodajemy index signature, aby akceptować dowolne dodatkowe propsy (np. 'attribute')
+  [key: string]: any; 
 }
 
 type ThemeContextType = {
@@ -19,13 +25,18 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
-export function ThemeProvider({ children, defaultTheme = "light" }: ThemeProviderProps) {
+// Akceptujemy wszystkie propsy, nawet te, których nie używamy (np. 'attribute')
+export function ThemeProvider({ children, defaultTheme = "light", ...props }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>(defaultTheme)
   const [mounted, setMounted] = useState(false)
 
+  // NOTE: Ta implementacja używa localStorage i manipuluje klasami CSS ręcznie, 
+  // zamiast polegać na bibliotece next-themes.
+
   useEffect(() => {
     setMounted(true)
-    const savedTheme = localStorage.getItem("theme") as Theme | null
+    // Zmieniono: używamy window.localStorage, aby uniknąć ewentualnego błędu typu
+    const savedTheme = (window.localStorage.getItem("theme") as Theme | null) 
     if (savedTheme) {
       setThemeState(savedTheme)
     }
@@ -38,7 +49,7 @@ export function ThemeProvider({ children, defaultTheme = "light" }: ThemeProvide
     root.classList.remove("light", "dark")
     root.classList.add(theme)
 
-    localStorage.setItem("theme", theme)
+    window.localStorage.setItem("theme", theme)
   }, [theme, mounted])
 
   const setTheme = (newTheme: Theme) => {

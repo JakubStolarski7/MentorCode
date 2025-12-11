@@ -1,14 +1,40 @@
-[00:00:38.645] Server  LOG      ✓ Ready in 23.6s
-[00:00:47.526] Server  LOG      ○ Compiling / ...
-[00:01:08.798] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:09.621] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:01:09.621] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:01:09.621] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1765450699850}
-[00:01:17.406] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1765450707643}
-[00:01:27.654] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/register color: rgb(120, 120, 120) color: inherit {"dp":"/register","o":"http://localhost:3000/register","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1765450717884}
-[00:01:39.650] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1765450729886}
-[00:01:46.285] Server  LOG      ○ Compiling /zapytaj ...
-[00:01:54.930] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:55.174] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:01:55.174] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/zapytaj","route":"/zapytaj"}
-[00:01:55.174] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/zapytaj color: rgb(120, 120, 120) color: inherit {"dp":"/zapytaj","o":"http://localhost:3000/zapytaj","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1765450745410}
+[00:01:01.437] Server  LOG      ✓ Ready in 33s
+[00:01:04.656] Server  LOG      ○ Compiling / ...
+[00:01:27.576] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:27.794] Browser ERROR   In HTML, whitespace text nodes cannot be a child of <%s>. Make sure you don't have any extra whitespace between tags on each line of your source code.
+This will cause a hydration error.%s html 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="/mentor_ma...">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+>                       <html lang="pl">
+>                         {" "}
+                          ...
+                  ...
+
+[00:01:28.781] Server  ERROR    ⨯ Detected default export in '[project]/mentor_main/app/api/auth/[...nextauth]/route.ts'. Export a named export for each HTTP method instead.
+[00:01:28.785] Server  ERROR    ⨯ No HTTP methods exported in '[project]/mentor_main/app/api/auth/[...nextauth]/route.ts'. Export a named export for each HTTP method.
+[00:01:28.956] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:01:28.956] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:01:28.957] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1765460269203}
+[00:01:30.955] Browser ERROR   [next-auth][error][CLIENT_FETCH_ERROR] 
+https://next-auth.js.org/errors#client_fetch_error Failed to execute 'json' on 'Response': Unexpected end of JSON input {"error":{"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input","name":"SyntaxError","stack":"SyntaxError: Unexpected end of JSON input\n    at _callee$ (http://localhost:3000/_next/static/chunks/ad0da_c5269b3e._.js:1552:32)\n    at http://localhost:3000/_next/static/chunks/ad0da_c5269b3e._.js:733:26\n    at Generator.<anonymous> (http://localhost:3000/_next/static/chunks/ad0da_c5269b3e._.js:557:63)\n    at Generator.next (http://localhost:3000/_next/static/chunks/ad0da_c5269b3e._.js:506:29)\n    at asyncGeneratorStep (http://localhost:3000/_next/static/chunks/ad0da_c5269b3e._.js:818:21)\n    at _next (http://localhost:3000/_next/static/chunks/ad0da_c5269b3e._.js:830:17)"},"message":"Failed to execute 'json' on 'Response': Unexpected end of JSON input","url":"/api/auth/session"}
+[00:01:31.942] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1765460272563}
+[00:01:44.864] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1765460285491}
+[00:01:46.616] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1765460287229}
+[00:01:47.812] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.5.0","sv":"0.1.3","ts":1765460288443}
