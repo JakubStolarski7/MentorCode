@@ -1,0 +1,22 @@
+version: '3.8' # Zalecana wersja składni Docker Compose
+
+services:
+  # Nazwa naszego serwisu (kontenera) bazy danych
+  db:
+    image: postgres:16-alpine # Używamy oficjalnego obrazu PostgreSQL w lekkiej wersji Alpine
+    restart: always # Kontener uruchomi się ponownie, jeśli się zawiesi
+    ports:
+      # Mapowanie portów: HOST:CONTAINER (Odsłaniamy port 5432 na naszym komputerze)
+      - "5432:5432"
+    environment:
+      # Używamy tych samych zmiennych, co w naszym DATABASE_URL:
+      POSTGRES_USER: postgres    # Użytkownik bazy danych
+      POSTGRES_PASSWORD: postgres # Hasło
+      POSTGRES_DB: mentorcode     # Nazwa naszej bazy danych
+    volumes:
+      # To zachowa dane bazy danych na dysku hosta (trwałość danych)
+      - postgres_data:/var/lib/postgresql/data
+
+# Definicja wolumenu (miejsce na dysku dla danych)
+volumes:
+  postgres_data:
